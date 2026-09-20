@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patience Atutsa | Asistente Virtual Bilingüe — Soporte Administrativo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-cream: #fdfbf7;
+            --bg-light: #f5f2ec;
+            --text-dark: #1a1a1a;
+            --text-med: #4a4a4a;
+            --text-light: #787878;
+            --accent: #c9a876;
+            --accent-light: #e8ddd0;
+            --border: #e5e0d8;
+            --white: #ffffff;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-cream); color: var(--text-dark); line-height: 1.7; overflow-x: hidden; }
+        h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; }
+
+        /* NAV */
+        header { position: fixed; top: 0; left: 0; right: 0; background: rgba(253,251,247,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 1.1rem 5%; z-index: 1000; transition: box-shadow 0.3s; }
+        nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; font-weight: 600; color: var(--text-dark); text-decoration: none; }
+        .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+        .nav-links a { color: var(--text-med); text-decoration: none; font-size: 0.88rem; font-weight: 400; position: relative; transition: color 0.3s; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s; }
+        .nav-links a:hover { color: var(--text-dark); }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* HERO */
+        .hero { margin-top: 72px; padding: 7rem 5% 5rem; max-width: 1200px; margin-left: auto; margin-right: auto; min-height: 88vh; display: flex; flex-direction: column; justify-content: center; animation: fadeUp 0.9s ease; }
+        @keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+        .hero h1 { font-size: 3.8rem; font-weight: 300; line-height: 1.15; margin-bottom: 1rem; }
+        .hero h1 .acc { color: var(--accent); font-weight: 600; }
+        .hero .sub { font-size: 1.25rem; color: var(--text-med); margin-bottom: 1.8rem; font-weight: 400; }
+        .hero > p { font-size: 1.02rem; color: var(--text-light); max-width: 600px; line-height: 1.9; margin-bottom: 2.5rem; }
+        .cta-row { display: flex; gap: 1rem; }
+        .btn { padding: 0.95rem 2.2rem; border-radius: 4px; text-decoration: none; font-size: 0.92rem; font-weight: 500; transition: all 0.3s; display: inline-block; }
+        .btn-dark { background: var(--text-dark); color: #fff; }
+        .btn-dark:hover { background: var(--accent); transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.13); }
+        .btn-outline { border: 1.5px solid var(--text-dark); color: var(--text-dark); }
+        .btn-outline:hover { background: var(--text-dark); color: #fff; transform: translateY(-2px); }
+        .stats { display: flex; gap: 4rem; margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid var(--border); }
+        .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 2.6rem; font-weight: 600; color: var(--accent); }
+        .stat-lbl { font-size: 0.82rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 1px; }
+
+        /* SHARED SECTION */
+        .sec { padding: 5.5rem 5%; }
+        .sec-inner { max-width: 1200px; margin: 0 auto; }
+        .sec-head { text-align: center; margin-bottom: 3.5rem; }
+        .sec-head h2 { font-size: 2.6rem; font-weight: 300; margin-bottom: 0.7rem; }
+        .sec-head p { color: var(--text-light); font-size: 1rem; max-width: 560px; margin: 0 auto; }
+
+        /* SERVICES */
+        .sec-services { background: var(--bg-light); }
+        .srv-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; }
+        .srv-card { background: var(--white); border-radius: 8px; border: 1px solid var(--border); padding: 2.2rem 2rem; transition: all 0.3s; }
+        .srv-card:hover { transform: translateY(-6px); box-shadow: 0 14px 32px rgba(0,0,0,0.08); }
+        .srv-icon { font-size: 2rem; margin-bottom: 1rem; }
+        .srv-card h3 { font-size: 1.45rem; margin-bottom: 0.7rem; }
+        .srv-card > p { color: var(--text-light); font-size: 0.92rem; margin-bottom: 1.2rem; }
+        .srv-list { list-style: none; }
+        .srv-list li { padding: 0.45rem 0; padding-left: 1.4rem; position: relative; color: var(--text-med); font-size: 0.9rem; }
+        .srv-list li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
+
+        /* PORTFOLIO */
+        .sec-portfolio { background: var(--white); }
+        .port-filters { display: flex; justify-content: center; gap: 0.8rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+        .port-filter { padding: 0.5rem 1.3rem; border-radius: 20px; border: 1px solid var(--border); background: transparent; color: var(--text-med); font-size: 0.88rem; cursor: pointer; transition: all 0.25s; font-family: inherit; }
+        .port-filter:hover, .port-filter.active { background: var(--text-dark); color: #fff; border-color: var(--text-dark); }
+        .port-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; }
+
+        /* Tarjeta de proyecto */
+        .port-item { background: var(--bg-light); border-radius: 8px; overflow: hidden; border: 1px solid var(--border); transition: all 0.3s; display: flex; flex-direction: column; }
+        .port-item:hover { transform: translateY(-6px); box-shadow: 0 14px 32px rgba(0,0,0,0.09); }
+
+        /* Visual header (sin imagen real) */
+        .proj-visual { height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; position: relative; }
+        .proj-visual .proj-icon { font-size: 3rem; position: relative; z-index: 1; }
+        .proj-visual .proj-title { font-size: 0.82rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-med); position: relative; z-index: 1; }
+        .proj-visual.clr-blog      { background: linear-gradient(135deg, #fde8d0, #f5d0b0); }
+        .proj-visual.clr-web       { background: linear-gradient(135deg, #d0e8fb, #b0ccf5); }
+        .proj-visual.clr-video     { background: linear-gradient(135deg, #f2e8fb, #e0d0f5); }
+        .proj-visual.clr-diseno    { background: linear-gradient(135deg, #e8fbf2, #d0f5e8); }
+        .proj-visual.clr-intermodular { background: linear-gradient(135deg, #fbf2e8, #f5e8d0); }
+        .proj-visual.clr-gestion   { background: linear-gradient(135deg, #e8f2fb, #d0e8f5); }
+        .proj-visual.clr-eventos   { background: linear-gradient(135deg, #fbe8f2, #f5d0e0); }
+        .proj-visual.clr-protocolo { background: linear-gradient(135deg, #f2fbe8, #e8f5d0); }
+        .proj-visual.clr-otros     { background: linear-gradient(135deg, #f2f3e8, #eef5d0); }
+
+        .port-info { padding: 1.4rem; flex: 1; display: flex; flex-direction: column; }
+        .port-info h3 { font-size: 1.2rem; margin-bottom: 0.4rem; }
+        .port-info p { color: var(--text-light); font-size: 0.88rem; line-height: 1.6; flex: 1; }
+        .tags { margin-top: 0.9rem; display: flex; gap: 0.4rem; flex-wrap: wrap; }
+        .tag { padding: 0.25rem 0.75rem; border-radius: 12px; background: var(--accent-light); color: var(--text-med); font-size: 0.78rem; }
+        .proj-link { display: inline-flex; align-items: center; gap: 0.45rem; margin-top: 1rem; color: var(--accent); text-decoration: none; font-size: 0.87rem; font-weight: 500; transition: color 0.25s; }
+        .proj-link:hover { color: var(--text-dark); }
+
+        /* Badge "EN VIVO" */
+        .live-badge { display: inline-block; background: #22c55e; color: #fff; font-size: 0.65rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: .18rem .55rem; border-radius: 20px; margin-left: .4rem; vertical-align: middle; }
+
+        /* OTRAS HABILIDADES (secundario) */
+        .sec-extra { background: var(--bg-light); padding-top: 3rem; padding-bottom: 3.5rem; }
+        .extra-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+        .extra-item { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 1.3rem 1rem; text-align: center; text-decoration: none; color: var(--text-med); transition: all 0.25s; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+        .extra-item:hover { transform: translateY(-4px); box-shadow: 0 10px 22px rgba(0,0,0,0.07); border-color: var(--accent); }
+        .extra-icon { font-size: 1.8rem; }
+        .extra-title { font-size: 0.85rem; font-weight: 500; color: var(--text-dark); }
+        .extra-tag { font-size: 0.75rem; color: var(--text-light); }
+        @media (max-width: 680px) { .extra-grid { grid-template-columns: 1fr 1fr; } }
+
+        /* SKILLS */
+        .sec-skills { background: var(--bg-cream); }
+        .skills-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+        .skills-col h3 { font-size: 1.7rem; margin-bottom: 1.8rem; font-weight: 400; }
+        .sk { margin-bottom: 1.6rem; }
+        .sk-head { display: flex; justify-content: space-between; margin-bottom: 0.6rem; font-size: 0.92rem; }
+        .sk-head span:first-child { font-weight: 500; }
+        .sk-head span:last-child { color: var(--text-light); font-size: 0.82rem; }
+        .sk-bar { height: 5px; background: var(--border); border-radius: 10px; overflow: hidden; }
+        .sk-fill { height: 100%; border-radius: 10px; background: linear-gradient(90deg, var(--accent-light), var(--accent)); }
+
+        /* ABOUT */
+        .sec-about { background: var(--white); }
+        .about-wrap { display: grid; grid-template-columns: 1.6fr 1fr; gap: 4rem; }
+        .about-left p { color: var(--text-med); font-size: 1rem; margin-bottom: 1.3rem; line-height: 1.85; }
+        .about-left strong { color: var(--text-dark); }
+        .why-list { list-style: none; margin-top: 1.8rem; }
+        .why-list li { padding: 0.65rem 0; padding-left: 1.6rem; position: relative; color: var(--text-med); font-size: 0.93rem; }
+        .why-list li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+        .about-box { background: var(--bg-light); border-radius: 8px; border: 1px solid var(--border); padding: 1.6rem 1.8rem; margin-bottom: 1rem; }
+        .about-box h4 { font-size: 1.25rem; margin-bottom: 0.8rem; }
+        .about-box p { font-size: 0.92rem; color: var(--text-med); margin-bottom: 0.7rem; }
+        .about-box p:last-child { margin-bottom: 0; }
+        .drive-list { list-style: none; margin-top: 0.5rem; }
+        .drive-list li { margin-bottom: 0.55rem; }
+        .drive-list a { color: var(--accent); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: color 0.25s; }
+        .drive-list a:hover { color: var(--text-dark); }
+
+        /* CONTACT */
+        .sec-contact { background: var(--text-dark); color: #fff; text-align: center; }
+        .sec-contact .sec-head h2 { color: #fff; }
+        .sec-contact .sec-head p { color: rgba(255,255,255,0.7); }
+        .contact-row { display: flex; justify-content: center; gap: 4rem; margin-top: 2.5rem; flex-wrap: wrap; }
+        .c-item { display: flex; flex-direction: column; gap: 0.4rem; }
+        .c-item .c-lbl { font-size: 0.8rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; }
+        .c-item a, .c-item .c-val { color: #fff; text-decoration: none; font-size: 1.05rem; font-weight: 500; transition: color 0.25s; }
+        .c-item a:hover { color: var(--accent); }
+        .contact-cta { margin-top: 2.8rem; }
+        .btn-light { background: #fff; color: var(--text-dark); }
+        .btn-light:hover { background: var(--accent); color: #fff; transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.2); }
+
+        footer { background: #111; color: rgba(255,255,255,0.5); text-align: center; padding: 1.8rem 5%; font-size: 0.85rem; }
+
+        /* ANIMATIONS */
+        .fade-in { opacity: 1; transform: translateY(0); transition: opacity 0.7s ease, transform 0.7s ease; }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .srv-grid, .port-grid { grid-template-columns: repeat(2, 1fr); }
+            .skills-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+            .about-wrap { grid-template-columns: 1fr; gap: 2rem; }
+        }
+        @media (max-width: 680px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.6rem; }
+            .srv-grid, .port-grid { grid-template-columns: 1fr; }
+            .stats { gap: 2rem; }
+            .cta-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<header>
+  <nav>
+    <a href="#" class="logo">Patience Atutsa</a>
+    <ul class="nav-links">
+      <li><a href="#services">Servicios</a></li>
+      <li><a href="#portfolio">Portafolio</a></li>
+      <li><a href="#skills">Habilidades</a></li>
+      <li><a href="#about">Sobre Mí</a></li>
+      <li><a href="#contact">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Asistente Virtual<br><span class="acc">Bilingüe &amp; Soporte Administrativo</span></h1>
+  <p class="sub">Gestión de Agenda · Correo · Documentación · Atención al Cliente</p>
+  <p>Técnica en Asistencia a la Dirección (Español nativo / Inglés C1) especializada en organizar el trabajo administrativo de pequeños negocios: agenda, correo, documentos y atención al cliente. Rápida, detallista y disponible para proyectos freelance a tiempo parcial.</p>
+  <div class="cta-row">
+    <a href="#contact" class="btn btn-dark">Trabajemos juntos</a>
+    <a href="#portfolio" class="btn btn-outline">Ver mi trabajo</a>
+  </div>
+  <div class="stats">
+    <div><span class="stat-num">8+</span><p class="stat-lbl">Proyectos</p></div>
+    <div><span class="stat-num">C1</span><p class="stat-lbl">Inglés</p></div>
+    <div><span class="stat-num">100%</span><p class="stat-lbl">Dedicación</p></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec sec-services" id="services">
+  <div class="sec-inner">
+    <div class="sec-head fade-in">
+      <h2>Mis Servicios</h2>
+      <p>Soluciones profesionales adaptadas a tus necesidades</p>
+    </div>
+    <div class="srv-grid">
+      <div class="srv-card fade-in">
+        <div class="srv-icon">📋</div>
+        <h3>Gestión de Agenda</h3>
+        <p>Coordinación de citas y calendario para que no se te escape nada.</p>
+        <ul class="srv-list">
+          <li>Gestión de agenda y coordinación de citas</li>
+          <li>Recordatorios y confirmaciones automáticas</li>
+          <li>Organización de reuniones y plazos</li>
+        </ul>
+      </div>
+      <div class="srv-card fade-in">
+        <div class="srv-icon">📧</div>
+        <h3>Correo &amp; Documentación</h3>
+        <p>Bandeja de entrada y archivos organizados, siempre al día.</p>
+        <ul class="srv-list">
+          <li>Gestión y organización de correo</li>
+          <li>Redacción y formateo de documentos</li>
+          <li>Data entry y organización de archivos</li>
+          <li>Informes y hojas de cálculo</li>
+        </ul>
+      </div>
+      <div class="srv-card fade-in">
+        <div class="srv-icon">📞</div>
+        <h3>Atención al Cliente</h3>
+        <p>Primera línea de contacto profesional en español e inglés.</p>
+        <ul class="srv-list">
+          <li>Atención telefónica y por email</li>
+          <li>Resolución de consultas e incidencias</li>
+          <li>Soporte bilingüe (Español / Inglés C1)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="sec sec-portfolio" id="portfolio">
+  <div class="sec-inner">
+    <div class="sec-head fade-in">
+      <h2>Proyectos &amp; Trabajos</h2>
+      <p>Trabajo real de organización, gestión y coordinación — más algunas piezas creativas</p>
+    </div>
+
+    <div class="port-filters">
+      <button class="port-filter active" data-cat="all">Todos</button>
+      <button class="port-filter" data-cat="gestion">Gestión &amp; Organización</button>
+      <button class="port-filter" data-cat="web">Web &amp; Blog</button>
+    </div>
+
+    <div class="port-grid" id="portGrid">
+
+      <!-- PROYECTO INTERMODULAR -->
+      <div class="port-item fade-in" data-cat="gestion">
+        <div class="proj-visual clr-gestion">
+          <span class="proj-icon">🎯</span>
+          <span class="proj-title">Proyecto Intermodular</span>
+        </div>
+        <div class="port-info">
+          <h3>Proyecto Intermodular</h3>
+          <p>Proyecto multidisciplinario que integra gestión administrativa, organización y comunicación profesional. Resultado de trabajo orientado a resultados reales.</p>
+          <div class="tags"><span class="tag">Gestión</span><span class="tag">Organización</span><span class="tag">Presentación</span></div>
+          <a href="https://drive.google.com/drive/folders/1DD1-dpjsr8lyXCrxp0siWD6ADPX5o83Y?usp=drive_link" target="_blank" class="proj-link">📁 Ver proyecto →</a>
+        </div>
+      </div>
+
+      <!-- EVENTOS -->
+      <div class="port-item fade-in" data-cat="gestion">
+        <div class="proj-visual clr-protocolo">
+          <span class="proj-icon">🎪</span>
+          <span class="proj-title">Gestión de Eventos</span>
+        </div>
+        <div class="port-info">
+          <h3>Proyectos de Eventos</h3>
+          <p>Planificación y coordinación de eventos: presupuestos, cronogramas, logística y documentación profesional de principio a fin.</p>
+          <div class="tags"><span class="tag">Eventos</span><span class="tag">Coordinación</span><span class="tag">Logística</span></div>
+          <a href="https://drive.google.com/drive/folders/1Pf6gLut_EvBC3EpOO6eHyJ-qQ6ehcd1Q?usp=drive_link" target="_blank" class="proj-link">📁 Ver proyectos →</a>
+        </div>
+      </div>
+
+      <!-- PLANIFICACIÓN MS PROJECT -->
+      <div class="port-item fade-in" data-cat="gestion">
+        <div class="proj-visual clr-otros">
+          <span class="proj-icon">📊</span>
+          <span class="proj-title">Planificación</span>
+        </div>
+        <div class="port-info">
+          <h3>Planificación con MS Project</h3>
+          <p>Gestión de proyectos con Microsoft Project: diagramas de Gantt, asignación de recursos, seguimiento de tareas y plazos.</p>
+          <div class="tags"><span class="tag">MS Project</span><span class="tag">Planificación</span><span class="tag">Gestión</span></div>
+          <a href="https://drive.google.com/drive/folders/1NYlpFuc37yfJzLZU-TDtvAKngg37qNFK?usp=drive_link" target="_blank" class="proj-link">📁 Ver planificación →</a>
+        </div>
+      </div>
+
+      <!-- BLOG SOLEA -->
+      <div class="port-item fade-in" data-cat="web">
+        <div class="proj-visual clr-blog">
+          <span class="proj-icon">📝</span>
+          <span class="proj-title">Blog Corporativo</span>
+        </div>
+        <div class="port-info">
+          <h3>Solea Journal <span class="live-badge">EN VIVO</span></h3>
+          <p>Blog corporativo creado y gestionado en Blogger con identidad propia, estructura editorial profesional y contenido publicado.</p>
+          <div class="tags"><span class="tag">Blogger</span><span class="tag">Redacción</span><span class="tag">Gestión de contenido</span></div>
+          <a href="https://solea-journal.blogspot.com/" target="_blank" class="proj-link">🌐 Ver blog en vivo →</a>
+        </div>
+      </div>
+
+      <!-- GOOGLE SITES - SOLEA BEAUTY -->
+      <div class="port-item fade-in" data-cat="web">
+        <div class="proj-visual clr-web">
+          <span class="proj-icon">🌐</span>
+          <span class="proj-title">Página Web</span>
+        </div>
+        <div class="port-info">
+          <h3>Solea Beauty Salon <span class="live-badge">EN VIVO</span></h3>
+          <p>Sitio web funcional y publicado diseñado con Google Sites para un salón de belleza. Incluye servicios, galería y contacto.</p>
+          <div class="tags"><span class="tag">Google Sites</span><span class="tag">Diseño web</span><span class="tag">UX</span></div>
+          <a href="https://sites.google.com/view/soleabeautysalon?usp=sharing" target="_blank" class="proj-link">🌐 Ver web en vivo →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- OTRAS HABILIDADES (secundario) -->
+<section class="sec sec-extra" id="extra">
+  <div class="sec-inner">
+    <div class="sec-head fade-in">
+      <h2 style="font-size:2rem;">Otras Habilidades (opcional)</h2>
+      <p>Diseño y edición de vídeo — trabajo real, por si tu proyecto lo necesita puntualmente</p>
+    </div>
+    <div class="extra-grid">
+      <a href="https://drive.google.com/file/d/1Kx2zmvi8qYRYvtObYpgIsl_nJY6901lq/view?usp=sharing" target="_blank" class="extra-item">
+        <span class="extra-icon">📄</span>
+        <span class="extra-title">CV Freelancer Actualizado</span>
+        <span class="extra-tag">Diseño</span>
+      </a>
+      <a href="https://drive.google.com/drive/folders/10l6nQEiQR9MEMhIQUonZAHsAjQlDkzh5?usp=drive_link" target="_blank" class="extra-item">
+        <span class="extra-icon">🎨</span>
+        <span class="extra-title">Diseños &amp; Logos</span>
+        <span class="extra-tag">Canva Pro</span>
+      </a>
+      <a href="https://drive.google.com/file/d/191SkXNRkZWiRHpQR1TUbGCPcegLT7wGH/view?usp=sharing" target="_blank" class="extra-item">
+        <span class="extra-icon">🎬</span>
+        <span class="extra-title">Vídeo Promocional — Vol. 1</span>
+        <span class="extra-tag">CapCut</span>
+      </a>
+      <a href="https://drive.google.com/file/d/1r7sW3qm8z3TQTtBsJjGqh_jBmCQVV2fG/view?usp=sharing" target="_blank" class="extra-item">
+        <span class="extra-icon">🎥</span>
+        <span class="extra-title">Vídeo Promocional — Vol. 2</span>
+        <span class="extra-tag">CapCut</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="sec sec-skills" id="skills">
+  <div class="sec-inner">
+    <div class="sec-head fade-in">
+      <h2>Habilidades &amp; Herramientas</h2>
+      <p>Competencias técnicas y profesionales</p>
+    </div>
+    <div class="skills-wrap">
+      <div class="skills-col fade-in">
+        <h3>Herramientas Técnicas</h3>
+        <div class="sk"><div class="sk-head"><span>Microsoft Office (Word · Excel · PowerPoint)</span><span>Avanzado</span></div><div class="sk-bar"><div class="sk-fill" style="width:92%"></div></div></div>
+        <div class="sk"><div class="sk-head"><span>Google Workspace (Docs · Sheets · Drive)</span><span>Avanzado</span></div><div class="sk-bar"><div class="sk-fill" style="width:90%"></div></div></div>
+        <div class="sk"><div class="sk-head"><span>Canva Pro / Genially</span><span>Avanzado</span></div><div class="sk-bar"><div class="sk-fill" style="width:90%"></div></div></div>
+        <div class="sk"><div class="sk-head"><span>Google Sites / Blogger</span><span>Avanzado</span></div><div class="sk-bar"><div class="sk-fill" style="width:88%"></div></div></div>
+        <div class="sk"><div class="sk-head"><span>CapCut / Clipchamp</span><span>Intermedio</span></div><div class="sk-bar"><div class="sk-fill" style="width:78%"></div></div></div>
+        <div class="sk"><div class="sk-head"><span>MS Project</span><span>Intermedio</span></div><div class="sk-bar"><div class="sk-fill" style="width:72%"></div></div></div>
+      </div>
+      <div class="skills-col fade-in">
+        <h3>Competencias Profesionales</h3>
+        <div class="sk"><div class="sk-head"><span>Inglés C1 (escrito, hablado, comprensión)</span><span>Avanzado</span></div><div class="sk-bar"><div class="sk-fill" style="width:88%"></div></div></div>
+        <div class="sk"><div class="sk-head"><span>Organización y Gestión del Tiempo</span><span>Experto</span></div><div class="sk-bar"><div class="sk-fill" style="width:95%"></div></div></div>
+        <div class="sk"><div class="sk-head"><span>Comunicación Profesional Escrita</span><span>Experto</span></div><div class="sk-bar"><div class="sk-fill" style="width:95%"></div></div></div>
+        <div class="sk"><div class="sk-head"><span>Diseño Visual Funcional</span><span>Avanzado</span></div><div class="sk-bar"><div class="sk-fill" style="width:87%"></div></div></div>
+        <div class="sk"><div class="sk-head"><span>Trabajo Autónomo</span><span>Experto</span></div><div class="sk-bar"><div class="sk-fill" style="width:95%"></div></div></div>
+        <div class="sk"><div class="sk-head"><span>Atención al Detalle</span><span>Experto</span></div><div class="sk-bar"><div class="sk-fill" style="width:95%"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="sec sec-about" id="about">
+  <div class="sec-inner">
+    <div class="sec-head fade-in">
+      <h2>Sobre Mí</h2>
+      <p>Conoce más sobre mi perfil profesional</p>
+    </div>
+    <div class="about-wrap">
+      <div class="about-left fade-in">
+        <p>Hola, soy <strong>Patience Atutsa</strong>, Técnica Superior en Asistencia a la Dirección con experiencia real en gestión de agenda, correo, documentación y atención al cliente.</p>
+        <p>Mi formación me ha dado una base sólida en organización y eficiencia, con capacidad de aprender rápido cualquier herramienta nueva que necesite un cliente. Hablo inglés a nivel C1, lo que me permite trabajar con clientes internacionales sin barreras.</p>
+        <p>Actualmente busco proyectos freelance para construir experiencia real y demostrar mi compromiso. Empiezo con precios competitivos y priorizo la calidad y los plazos en cada entrega.</p>
+        <h3 style="font-size:1.55rem; margin-top:2rem; margin-bottom:0.8rem;">¿Por qué trabajar conmigo?</h3>
+        <ul class="why-list">
+          <li>Bilingüe Español / Inglés C1 — trabajo con clientes internacionales</li>
+          <li>Proyectos reales y publicados que puedes ver ahora mismo</li>
+          <li>Alta organización y autonomía — entrego sin necesidad de supervisión constante</li>
+          <li>Atención al detalle y compromiso con la calidad</li>
+          <li>Adaptación rápida a nuevas herramientas y entornos</li>
+          <li>Disponibilidad y respuesta rápida a mensajes</li>
+        </ul>
+      </div>
+      <div class="about-right fade-in">
+        <div class="about-box">
+          <h4>📚 Educación</h4>
+          <p><strong>Grado Superior – Asistencia a la Dirección</strong><br>IES Joaquín Turina · Sept 2024 – Jun 2026</p>
+          <p><strong>Bachillerato de Artes Escénicas</strong><br>IES Carmen Laffón · 2021 – 2023</p>
+        </div>
+        <div class="about-box">
+          <h4>💼 Experiencia</h4>
+          <p><strong>Auxiliar Administrativa</strong><br>VD Asesores S.L. · Oct 2025 – Jun 2026</p>
+          <p><strong>Recepcionista Administrativa</strong><br>Quiroprevención · Ene–Feb 2025</p>
+        </div>
+        <div class="about-box">
+          <h4>🌍 Idiomas</h4>
+          <p><strong>Español:</strong> Nativo<br><strong>Inglés:</strong> C1 Avanzado</p>
+        </div>
+        <div class="about-box">
+          <h4>📁 Todos los proyectos</h4>
+          <ul class="drive-list">
+            <li><a href="https://drive.google.com/drive/folders/1DD1-dpjsr8lyXCrxp0siWD6ADPX5o83Y?usp=drive_link" target="_blank">🎯 Proyecto Intermodular</a></li>
+            <li><a href="https://drive.google.com/drive/folders/1Pf6gLut_EvBC3EpOO6eHyJ-qQ6ehcd1Q?usp=drive_link" target="_blank">🎪 Proyectos de Eventos</a></li>
+            <li><a href="https://drive.google.com/drive/folders/1NYlpFuc37yfJzLZU-TDtvAKngg37qNFK?usp=drive_link" target="_blank">📊 Planificación MS Project</a></li>
+            <li><a href="https://solea-journal.blogspot.com/" target="_blank">📝 Blog Solea Journal</a></li>
+            <li><a href="https://sites.google.com/view/soleabeautysalon?usp=sharing" target="_blank">🌐 Web Solea Beauty Salon</a></li>
+            <li><a href="#extra">🎨 Otras habilidades (diseño/vídeo)</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec sec-contact" id="contact">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <h2>Trabajemos Juntos</h2>
+      <p>¿Tienes un proyecto en mente? Estoy disponible y lista para colaborar</p>
+    </div>
+    <div class="contact-row">
+      <div class="c-item">
+        <span class="c-lbl">Email</span>
+        <a href="mailto:glory.atutsa@gmail.com">glory.atutsa@gmail.com</a>
+      </div>
+      <div class="c-item">
+        <span class="c-lbl">Teléfono</span>
+        <a href="tel:+34632703653">+34 632 70 36 53</a>
+      </div>
+      <div class="c-item">
+        <span class="c-lbl">Upwork</span>
+        <a href="https://www.upwork.com/freelancers/~0186bf370b72cb4ac5?companyReference=1749598564234035201&mp_source=share" target="_blank">Patience Atutsa</a>
+      </div>
+      <div class="c-item">
+        <span class="c-lbl">Ubicación</span>
+        <span class="c-val">Andalucía, España</span>
+      </div>
+    </div>
+    <div class="contact-cta">
+      <a href="mailto:glory.atutsa@gmail.com" class="btn btn-light">Enviar mensaje</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 Patience Atutsa · Asistente Virtual Bilingüe &amp; Soporte Administrativo · Andalucía, España</p>
+</footer>
+
+<script>
+// Scroll fade-in
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+// Header shadow on scroll
+window.addEventListener('scroll', () => {
+  document.querySelector('header').style.boxShadow =
+    window.pageYOffset > 60 ? '0 2px 12px rgba(0,0,0,0.07)' : 'none';
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// Portfolio filters
+const filters = document.querySelectorAll('.port-filter');
+const items   = document.querySelectorAll('#portGrid .port-item');
+filters.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filters.forEach(f => f.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.cat;
+    items.forEach(item => {
+      item.style.display = (cat === 'all' || item.dataset.cat === cat) ? '' : 'none';
+    });
+  });
+});
+</script>
+</body>
+</html>
